@@ -37,15 +37,13 @@ public class MenuConsoleApp {
                     System.out.println(domainFile.getIpByDomainName(nameDomain));
                     break;
                 case GET_DOMAIN:
-                    System.out.println("Введите ip адрес:");
-                    String ip = scanner.next();
+                    String ip = checkingValidityIpAddress("Введите ip адрес:");
                     System.out.println(domainFile.getDomainByIP(ip));
                     break;
                 case ADD:
                     System.out.println("Введите имя домена:");
                     String domain = scanner.next();
-                    System.out.println("Введите ip домена:");
-                    String newIp = scanner.next();
+                    String newIp = checkingValidityIpAddress("Введите ip домена:");
                     try {
                         domainFile.addNewAddressDomain(domain, newIp);
                     } catch (RuntimeException e) {
@@ -56,8 +54,7 @@ public class MenuConsoleApp {
                 case DELETE:
                     System.out.println("Введите имя домена:");
                     String deleteDomain = scanner.next();
-                    System.out.println("Введите ip домена:");
-                    String deleteIp = scanner.next();
+                    String deleteIp = checkingValidityIpAddress("Введите ip домена:");
                     try {
                         domainFile.deleteDomainAndIp(deleteDomain, deleteIp);
                     } catch (RuntimeException e) {
@@ -128,7 +125,7 @@ public class MenuConsoleApp {
                     break;
                 }
                 if (number < 0 || number > 255) {
-                    System.out.println("Число " + number + " выходит за пределы диапазона от 0 до 255).");
+                    System.out.println("Число " + number + " выходит за пределы диапазона от 0 до 255.");
                     isValid = false;
                     break;
                 }
