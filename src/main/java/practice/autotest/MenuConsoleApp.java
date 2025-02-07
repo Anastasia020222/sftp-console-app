@@ -9,8 +9,14 @@ public class MenuConsoleApp {
 
     private static final DomainFile domainFile = new DomainFile();
     private static final Scanner scanner = new Scanner(System.in);
+    public static String path;
 
     public static void main(String[] args) {
+        if (args.length != 0) {
+            path = args[0];
+        } else {
+            throw new RuntimeException("Путь до файла .json с доменами на sftp-сервере не был передан.");
+        }
         menuConnectSftp();
 
         CommandMenu com;

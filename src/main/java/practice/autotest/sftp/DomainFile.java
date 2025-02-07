@@ -7,11 +7,10 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 
+import static practice.autotest.MenuConsoleApp.path;
 import static practice.autotest.common.ParseJson.*;
 
 public class DomainFile extends AbsFiles {
-
-    private final String remoteFilePath = "/home/sftpuser/files/domain.json";
 
     public void readRemoteJsonDomainFile() {
         printDomainAddressesList(getListAddress());
@@ -46,7 +45,7 @@ public class DomainFile extends AbsFiles {
     }
 
     private String getListAddress() {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(getRemoteFile(remoteFilePath), StandardCharsets.UTF_8));
+        BufferedReader reader = new BufferedReader(new InputStreamReader(getRemoteFile(path), StandardCharsets.UTF_8));
         String line;
         StringBuilder sb = new StringBuilder();
         while (true) {
@@ -74,7 +73,7 @@ public class DomainFile extends AbsFiles {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            putRemoteFile(tempFile.getAbsolutePath(), remoteFilePath);
+            putRemoteFile(tempFile.getAbsolutePath(), path);
             System.out.println("Домен " + domain + " успешно добавлен.");
         } catch (Exception e) {
             throw new RuntimeException("Не удалось обновить файл: " + e);
@@ -97,7 +96,7 @@ public class DomainFile extends AbsFiles {
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }
-            putRemoteFile(tempFile.getAbsolutePath(), remoteFilePath);
+            putRemoteFile(tempFile.getAbsolutePath(), path);
             System.out.println("Данные с доменом " + domain + " успешно удалены.");
         } catch (Exception e) {
             throw new RuntimeException("Не удалось обновить файл: " + e);
