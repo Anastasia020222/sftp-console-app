@@ -12,18 +12,12 @@ public class MenuConsoleApp {
     public static String path;
 
     public static void main(String[] args) {
-        if (args.length != 0) {
-            path = args[0];
-        } else {
-            throw new RuntimeException("Путь до файла .json с доменами на sftp-сервере не был передан.");
-        }
+        getFile(args);
         menuConnectSftp();
-
         CommandMenu com;
         boolean exit = false;
 
         while (!exit) {
-
             System.out.println("Введите команду: list/get_ip/get_domain/add/delete/exit");
             String input = scanner.next();
             try {
@@ -138,6 +132,23 @@ public class MenuConsoleApp {
             }
             if (isValid) {
                 return ip;
+            }
+        }
+    }
+
+    public static void getFile(String[] args) {
+        while (true) {
+            if (args.length == 0) {
+                System.out.println("Вы не передали файл, укажите путь до файла с доменами на sftp-сервере");
+                path = scanner.nextLine();
+                if (!path.isEmpty()) {
+                    break;
+                }
+            } else if (args.length != 0) {
+                path = args[0];
+                break;
+            } else {
+                throw new RuntimeException("Путь до файла .json с доменами на sftp-сервере не был передан.");
             }
         }
     }
